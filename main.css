@@ -37,6 +37,30 @@ body{
   margin-top: 15px;
 }
 
+.serverList .nav-tabs {
+  border-bottom: 0 none;
+}
+
+.serverList .nav-item a {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.serverList .nav-item .active {
+  color: #FFFFFF;
+  background-color: #424242;
+  border: 0;
+}
+
+.serverList .nav-tabs .nav-link:focus{
+  border-color: transparent;
+}
+
+.serverList .nav-tabs .nav-link:hover{
+  border-color: transparent;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 0;
+}
+
 .serverItems li, .favoriteItems li {
   margin: 15px;
 }
@@ -64,30 +88,16 @@ body{
   max-height: 250px;
   border: 1px none;
   border-radius: 5px;
+  padding: 0;
 }
 
-.serverList .nav-tabs {
-  border-bottom: 0 none;
-}
-
-.serverList .nav-item a {
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.serverList .nav-item .active {
-  color: #FFFFFF;
-  background-color: #424242;
-  border: 0;
-}
-
-.serverList .nav-tabs .nav-link:focus{
-  border-color: transparent;
-}
-
-.serverList .nav-tabs .nav-link:hover{
-  border-color: transparent;
-  color: rgba(255, 255, 255, 0.5);
-  margin-bottom: 0;
+.serverBar {
+  background-color: #212121;
+  height: 10%;
+  border: 1px none;
+  border-radius: 5px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .masterMOTD {
