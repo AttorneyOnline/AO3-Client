@@ -87,6 +87,13 @@ body{
 .serverList .nav-tabs .nav-link:hover{
   border-color: transparent;
   color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 0;
+}
+
+.masterMOTD {
+  border: 1px none;
+  border-radius: 5px;
+  background-color: #424242;
 }
 
 .hidden {

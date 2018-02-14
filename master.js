@@ -2,6 +2,7 @@ var masterServer = 'http://gameboyprinter.moe/master.php';
 
 $(document).ready(() => {
   $.getJSON(masterServer, (result) => {
+    $('#motd').html(result['motd']);
     $.each(result['servers'], (i, field) => {
       $('.serverItems').append('<li><button class="btn serverBtn" data-ip="' + field.ip +'" data-port="' + field.port + '" data-motd="' + field.motd + '">' + field.name + '</button></li>');
     });
