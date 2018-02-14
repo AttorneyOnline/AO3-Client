@@ -12,6 +12,20 @@ $(document).ready(() => {
       document.location.href = "client.html?remote=" + remote;
     });
 
+    $('#favoriteTab').click((o) => {
+      $('#serverTab').removeClass('active');
+      $('.masterList').addClass('hidden');
+      $('#favoriteTab').addClass('active');
+      $('.favoriteList').removeClass('hidden');
+    });
+
+    $('#serverTab').click((o) => {
+      $('#favoriteTab').removeClass('active');
+      $('.favoriteList').addClass('hidden');
+      $('#serverTab').addClass('active');
+      $('.masterList').removeClass('hidden');
+    });
+
     $('.serverBtn').mouseover((o) => {
       var remote = $(o.target).data('ip') + ':' + $(o.target).data('port');
       var motd = $(o.target).data('motd');

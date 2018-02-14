@@ -34,13 +34,14 @@ body{
   overflow-y: auto;
   margin-left: -25px;
   margin-right: 25px;
+  margin-top: 15px;
 }
 
-.serverItems li {
+.serverItems li, .favoriteItems li {
   margin: 15px;
 }
 
-.serverItems {
+.serverItems, .favoriteItems {
   list-style-type: none;
   background-color: #424242;
   border: 1px none;
@@ -48,9 +49,12 @@ body{
   margin-top: -2px;
   padding-top: 1px; /* Makes the border of the tabs and the div meet up */
   padding-bottom: 15px;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  border-top-right-radius: 5px;
+  border-radius: 5px;
+  border-top-left-radius: 0;
+}
+
+.favoriteItems {
+  border-top-left-radius: 5px;
 }
 
 .serverInfo {
@@ -67,7 +71,7 @@ body{
 }
 
 .serverList .nav-item a {
-  color: rgba(255, 255, 255, 0.7)
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .serverList .nav-item .active {
@@ -83,4 +87,8 @@ body{
 .serverList .nav-tabs .nav-link:hover{
   border-color: transparent;
   color: rgba(255, 255, 255, 0.5);
+}
+
+.hidden {
+  display: none;
 }
