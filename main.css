@@ -1,37 +1,56 @@
+/* Turn on custom 8px wide scrollbar */
+::-webkit-scrollbar {
+  width: 8px; /* 1px wider than Lion. */
+  /* This is more usable for users trying to click it. */
+  background-color: rgba(0,0,0,0);
+  -webkit-border-radius: 100px;
+}
+/* hover effect for both scrollbar area, and scrollbar 'thumb' */
+::-webkit-scrollbar:hover {
+  background-color: rgba(0, 0, 0, 0.09);
+}
+
+/* The scrollbar 'thumb' ...that marque oval shape in a scrollbar */
+::-webkit-scrollbar-thumb:vertical {
+  /* This is the EXACT color of Mac OS scrollbars.
+     Yes, I pulled out digital color meter */
+  background: rgba(0,0,0,0.5);
+  -webkit-border-radius: 100px;
+}
+::-webkit-scrollbar-thumb:vertical:active {
+  background: rgba(0,0,0,0.61); /* Some darker color when you click it */
+  -webkit-border-radius: 100px;
+}
+
 body{
-  background: #2c3d51;
-  color: white;
+  overflow: hidden;
 }
 
 .serverList {
   text-align: center;
   height: 100%;
+  overflow-y: auto;
+  margin-left: -25px;
+  margin-right: 25px;
 }
 
-.serverList li {
+.serverItems li {
   margin: 15px;
 }
 
 .serverItems {
   list-style-type: none;
+  border: 1px solid #dee2e6;
+  border-top: 0;
+  padding-top: 1px; /* Makes the border of the tabs and the div meet up */
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .serverInfo {
   margin-top: 15px;
   text-align: center;
   max-height: 250px;
-  border: 1px solid #ffe591;
+  border: 1px solid black;
   border-radius: 5px;
-  background-color: #473322;
-}
-
-.btn {
-  background-color: #2f2216;
-  max-width: 400px;
-  padding: 10px;
-  text-align: center;
-  border: 2px solid #ffe591;
-  color: white !important;
-  border-radius: 15px;
-  margin: 0 auto;
 }
