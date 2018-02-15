@@ -9,7 +9,10 @@
 
     <!-- do both so that we can work on a browser and in electron !-->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script>window.$ = window.jQuery = require('jquery');</script>
+    <script>
+      if((window && window.process && window.process.type) != undefined)
+        window.$ = window.jQuery = require('jquery');
+    </script>
 
     <script src="../js/master.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/main.css">
