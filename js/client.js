@@ -65,6 +65,9 @@ const handlers = {
   },
   'assets': (response) => {
     assets = response.assets;
+    var totalProgress = 0;
+    $('#totalProgress').attr('max', assets.length);
+    $('#totalProgress').attr('value', totalProgress);
     $.each(assets, (i, asset) => {
       //is it in our cache?
       localforage.getItem(asset, (err, value) => {
@@ -81,17 +84,21 @@ const handlers = {
               $.getJSON(`${name}meta/${asset}/`, (result) => {
                 //Download asset info
                 localforage.setItem(asset, result);
-
+                $('#downloadingAsset').html(result.name);
                 //And download asset files
                 var progress = 0;
+                $('#assetProgress').attr('max', result.files.length);
                 $.each(result.files, (i, file) => {
                   $.get(`${name}file/${asset}/${file}`, function(dl) {
+                    $('#downloadingFile').html(file);
                     localforage.setItem(`${asset}/${file}`, dl);
                     progress++;
-                    console.log(`Downloaded ${progress} / ${result.files.length} files for asset ${asset}`);
+                    $('#assetProgress').attr('value', progress);
                   });
                 })
               });
+              totalProgress++;
+              $('#totalProgress').attr('value', totalProgress);
             }
           });
           if(!hit){
