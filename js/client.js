@@ -1,5 +1,4 @@
 const electron = (window && window.process && window.process.type) != undefined;
-var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
 
 var remote;
 var socket;
@@ -24,7 +23,7 @@ $(document).ready(() => {
     //Send a player count request to ensure the server is alive
     write({
       'type': 'get',
-      'get': 'player-count'
+      'get': 'playerCount'
     });
   };
 
@@ -71,7 +70,7 @@ const handlers = {
     $.each(assets, (i) => {
       var asset = assets[i];
       //is it in our cache?
-
+      console.log(asset);
     })
   }
 };
