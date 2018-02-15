@@ -4,7 +4,7 @@ var remote;
 var socket;
 var connected = false;
 var repos;
-var manifests = [];
+var manifests = {};
 var assets;
 
 $(document).ready(() => {
@@ -53,10 +53,9 @@ const handlers = {
   },
   'repos': (response) => {
     repos = response.repos;
-    $.each(repos, (i) => {
-      $.getJSON(repos[i] + 'manifest', (manifest) => {
-        manifests[repos[i]] = manifest;
-        console.log(manifests);
+    $.each(repos, (i, repo) => {
+      $.getJSON(repo + 'manifest', (manifest) => {
+        manifests[repo] = manifest;
         write({
           'type': 'get',
           'get': 'assets'
@@ -65,13 +64,47 @@ const handlers = {
     });
   },
   'assets': (response) => {
-    console.log(response);
     assets = response.assets;
-    $.each(assets, (i) => {
-      var asset = assets[i];
+    $.each(assets, (i, asset) => {
       //is it in our cache?
-      console.log(asset);
-    })
+      localforage.getItem(asset, (err, value) => {
+        if(value == null){
+          console.log(`Asset ${asset} not stored, downloading...`);
+          //Download asset
+          var hit = false;
+          var assetInfo;
+          $.each(manifests, (name, manifest) => {
+            if(hit)
+              return;
+            if(manifest.assets.includes(asset)){
+              hit = true;
+              $.getJSON(`${name}meta/${asset}/`, (result) => {
+                //Download asset info
+                localforage.setItem(asset, result);
+
+                //And download asset files
+                var progress = 0;
+                $.each(result.files, (i, file) => {
+                  $.get(`${name}file/${asset}/${file}`, function(dl) {
+                    localforage.setItem(`${asset}/${file}`, dl);
+                    progress++;
+                    console.log(`Downloaded ${progress} / ${result.files.length} files for asset ${asset}`);
+                  });
+                })
+              });
+            }
+          });
+          if(!hit){
+            console.log("Asset not found in any given repos.");
+          }
+          //localforage.setItem(asset, );
+        }
+        else{
+          //Everything is daijoubu
+          console.log(value);
+        }
+      });
+    });
   }
 };
 
