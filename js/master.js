@@ -1,4 +1,4 @@
-var masterServer = 'http://master.aceattorneyonline.com/master.php';
+var masterServer = 'https://master.aceattorneyonline.com/master.php';
 
 $(document).ready(() => {
   $.getJSON(masterServer, (result) => {
