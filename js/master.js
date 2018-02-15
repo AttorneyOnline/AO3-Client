@@ -1,3 +1,5 @@
+const electron = (window && window.process && window.process.type) != undefined;
+
 var masterServer = 'https://aceattorneyonline.com/master.php';
 
 $(document).ready(() => {
@@ -48,6 +50,7 @@ $(document).ready(() => {
           var response = JSON.parse(event.data);
           $(o.target).data('playerinfo', "Players: " + response.current + " / " + response.max);
           $('.serverBar').html('<p>' + $(o.target).data('playerinfo') + '</p>');
+          socket.close();
         };
 
         $(o.target).data('connected', 'true');
