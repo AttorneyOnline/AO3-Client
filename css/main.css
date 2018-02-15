@@ -85,6 +85,8 @@ body{
 .serverInfo {
   background-color: #424242;
   margin-top: 15px;
+  margin-right: -5px;
+  margin-left: auto;
   text-align: center;
   max-height: 250px;
   border: 1px none;
@@ -105,6 +107,14 @@ body{
   border: 1px none;
   border-radius: 5px;
   background-color: #424242;
+}
+
+.motdRow {
+  height: 25vh;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  margin-left: -25px;
+  width: calc(100% + 50px);
 }
 
 .hidden {
