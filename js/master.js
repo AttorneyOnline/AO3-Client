@@ -1,4 +1,4 @@
-var masterServer = 'http://gameboyprinter.moe/master.php';
+var masterServer = 'http://master.aceattorneyonline.com/master.php';
 
 $(document).ready(() => {
   $.getJSON(masterServer, (result) => {
