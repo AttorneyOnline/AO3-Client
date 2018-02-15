@@ -5,13 +5,32 @@
   "version": "3.0.0",
   "license": "AGPL-3.0",
   "main": "main.js",
+  "build": {
+    "appId": "com.aceattorneyonline.ao3",
+    "productName": "Attorney Online 3",
+    "directories": {
+      "buildResources": "build",
+      "output": "dist"
+    },
+    "win": {
+      "target": "portable"
+    },
+    "linux": {
+      "target": "zip"
+    }
+  },
+  "scripts": {
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AttorneyOnline/AO3-Client.git"
   },
   "dependencies": {
     "bootstrap": "^4.0.0",
-    "jquery": "^3.3.1"
+    "jquery": "^3.3.1",
+    "popper.js": "^1.12.9"
   },
   "devDependencies": {
     "electron-builder": "^20.0.4"
