@@ -85,20 +85,29 @@ const handlers = {
                 //Download asset info
                 localforage.setItem(asset, result);
                 $('#downloadingAsset').html(result.name);
+
                 //And download asset files
                 var progress = 0;
                 $('#assetProgress').attr('max', result.files.length);
+
+                //For each asset we have...
                 $.each(result.files, (i, file) => {
+                  //Download the compressed asset
                   $.get(`${name}zfile/${asset}/${file}`, function(dl) {
                     $('#downloadingFile').html(file);
+                    //Unzip and save it
                     localforage.setItem(`${asset}/${file}`, pako.inflate(octetStreamParser(dl)));
                     progress++;
                     $('#assetProgress').attr('value', progress);
+                    if(progress == result.files.length){
+                      totalProgress++;
+                      $('#totalProgress').attr('value', totalProgress);
+                    }
+                    if(totalProgress == assets.length)
+                      assetsComplete();
                   });
-                })
+                });
               });
-              totalProgress++;
-              $('#totalProgress').attr('value', totalProgress);
             }
           });
           if(!hit){
@@ -108,7 +117,10 @@ const handlers = {
         }
         else{
           //Everything is daijoubu
-          console.log(value);
+          totalProgress++;
+          $('#totalProgress').attr('value', totalProgress);
+          if(totalProgress == assets.length)
+            assetsComplete();
         }
       });
     });
@@ -119,6 +131,10 @@ window.onbeforeunload = function() {
     socket.onclose = function () {}; // disable onclose handler first
     socket.close()
 };
+
+function assetsComplete(){
+  console.log("done");
+}
 
 function octetStreamParser(data){
   var obj = JSON.parse(data);
