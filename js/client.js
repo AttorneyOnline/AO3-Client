@@ -89,9 +89,9 @@ const handlers = {
                 var progress = 0;
                 $('#assetProgress').attr('max', result.files.length);
                 $.each(result.files, (i, file) => {
-                  $.get(`${name}file/${asset}/${file}`, function(dl) {
+                  $.get(`${name}zfile/${asset}/${file}`, function(dl) {
                     $('#downloadingFile').html(file);
-                    localforage.setItem(`${asset}/${file}`, dl);
+                    localforage.setItem(`${asset}/${file}`, pako.inflate(debase64(dl)));
                     progress++;
                     $('#assetProgress').attr('value', progress);
                   });
@@ -119,6 +119,17 @@ window.onbeforeunload = function() {
     socket.onclose = function () {}; // disable onclose handler first
     socket.close()
 };
+
+function debase64(base64) {
+    var binary_string =  window.atob(base64);
+    var ints = binary_string.split(',');
+    var len = ints.length;
+    var bytes = new Uint8Array( len );
+    for (var i = 0; i < len; i++)        {
+        bytes[i] = ints[i];
+    }
+    return bytes.buffer;
+}
 
 function write(obj){
   socket.send(JSON.stringify(obj));
