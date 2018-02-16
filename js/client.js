@@ -83,7 +83,7 @@ const handlers = {
               hit = true;
               $.getJSON(`${name}meta/${asset}/`, (result) => {
                 //Download asset info
-                //localforage.setItem(asset, result);
+                localforage.setItem(asset, result);
                 $('#downloadingAsset').html(result.name);
                 //And download asset files
                 var progress = 0;
