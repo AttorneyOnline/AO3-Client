@@ -23,7 +23,7 @@ $(document).ready(() => {
     //Send a player count request to ensure the server is alive
     write({
       'type': 'get',
-      'get': 'playerCount'
+      'get': 'player_count'
     });
   };
 
@@ -42,7 +42,7 @@ $(document).ready(() => {
 });
 
 const handlers = {
-  'playerCount': (response) => {
+  'player_count': (response) => {
     //Server is alive!
     connected = true;
     $('.loading').addClass('hidden');
@@ -112,8 +112,12 @@ const handlers = {
           });
           if(!hit){
             console.log("Asset not found in any given repos.");
+            //Just ignore the asset lol
+            totalProgress++;
+            $('#totalProgress').attr('value', totalProgress);
+            if(totalProgress == assets.length)
+              assetsComplete();
           }
-          //localforage.setItem(asset, );
         }
         else{
           //Everything is daijoubu

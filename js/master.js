@@ -42,7 +42,7 @@ $(document).ready(() => {
         socket.onopen = (event) => {
           var msg = {
             "type": "get",
-            "get": "playerCount"
+            "get": "player_count"
           };
           socket.send(JSON.stringify(msg));
         };
