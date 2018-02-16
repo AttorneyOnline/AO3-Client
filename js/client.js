@@ -83,7 +83,7 @@ const handlers = {
               hit = true;
               $.getJSON(`${name}meta/${asset}/`, (result) => {
                 //Download asset info
-                localforage.setItem(asset, result);
+                //localforage.setItem(asset, result);
                 $('#downloadingAsset').html(result.name);
                 //And download asset files
                 var progress = 0;
@@ -91,7 +91,7 @@ const handlers = {
                 $.each(result.files, (i, file) => {
                   $.get(`${name}zfile/${asset}/${file}`, function(dl) {
                     $('#downloadingFile').html(file);
-                    localforage.setItem(`${asset}/${file}`, pako.inflate(debase64(dl)));
+                    localforage.setItem(`${asset}/${file}`, pako.inflate(octetStreamParser(dl)));
                     progress++;
                     $('#assetProgress').attr('value', progress);
                   });
@@ -120,15 +120,13 @@ window.onbeforeunload = function() {
     socket.close()
 };
 
-function debase64(base64) {
-    var binary_string =  window.atob(base64);
-    var ints = binary_string.split(',');
-    var len = ints.length;
-    var bytes = new Uint8Array( len );
-    for (var i = 0; i < len; i++)        {
-        bytes[i] = ints[i];
-    }
-    return bytes.buffer;
+function octetStreamParser(data){
+  var obj = JSON.parse(data);
+  var arr = [];
+  $.each(obj, (i, val) => {
+    arr[i] = val;
+  });
+  return new Uint8Array(arr).buffer;
 }
 
 function write(obj){
