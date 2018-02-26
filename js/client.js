@@ -1,5 +1,3 @@
-const electron = (window && window.process && window.process.type) != undefined;
-
 var remote;
 var socket;
 var connected = false;

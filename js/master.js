@@ -1,5 +1,3 @@
-const electron = (window && window.process && window.process.type) != undefined;
-
 var masterServer = 'http://assets.aceattorneyonline.com/master.php';
 
 $(document).ready(() => {
